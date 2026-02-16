@@ -6,7 +6,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { isSameDay, isAfter, isBefore } from "date-fns";
 
-import { getMedicationHistory } from "../services/history";
+// import { getMedicationHistory } from "../services/history";
 import { calculateAdherence } from "../services/adherence";
 
 const PatientDashboard = () => {
@@ -18,7 +18,8 @@ const PatientDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [calendar, setCalendar] = useState<Record<string, boolean>>({});
-  const [history, setHistory] = useState<any[]>([]);
+//   const [history, setHistory] = useState<any[]>([]);
+
   const [adherence, setAdherence] = useState(0);
 
   /* ---------------- DATES ---------------- */
@@ -61,7 +62,7 @@ const PatientDashboard = () => {
 
       setTodayTaken(true);
       loadCalendar();
-      loadHistory();
+    //   loadHistory();
       loadAdherence();
     } finally {
       setLoading(false);
@@ -96,11 +97,11 @@ const PatientDashboard = () => {
 };
 
 
-  const loadHistory = async () => {
-    if (!user) return;
-    const data = await getMedicationHistory(user.uid);
-    setHistory(data.slice(-7).reverse());
-  };
+//   const loadHistory = async () => {
+//     if (!user) return;
+//     const data = await getMedicationHistory(user.uid);
+//     setHistory(data.slice(-7).reverse());
+//   };
 
   const loadAdherence = async () => {
     if (!user) return;
@@ -111,7 +112,7 @@ const PatientDashboard = () => {
   useEffect(() => {
     checkTodayStatus();
     loadCalendar();
-    loadHistory();
+    // loadHistory();
     loadAdherence();
   }, []);
 
